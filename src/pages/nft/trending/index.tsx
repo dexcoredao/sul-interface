@@ -1,9 +1,9 @@
-import Layout from 'components/NFT/Layout'
+// import Layout from 'components/NFT/Layout'
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
 import { paths } from 'nfnt-client-sdk/dist/types/api'
 import setParams from 'features/nft/lib/params'
 import Head from 'next/head'
-// import FeaturedCollectionTable from 'components/FeaturedCollectionTable'
+// import FeaturedCollectionTable from 'components/NFT/collections/FeaturedCollectionTable'
 import TrendingCollectionTable from 'components/NFT/collections/TrendingCollectionTable'
 import { useMediaQuery } from '@react-hookz/web'
 import React, { useEffect } from 'react'
@@ -18,7 +18,7 @@ import { getChainColor, getChainColorCode } from 'constants/chains'
 // refer to the README.md file on this repository
 // Reference: https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser
 // REQUIRED
-const SOULSWAP_API_BASE = 'https://api.reservoir.tools' || 'https://api.reservoir.tools'
+const SOULSWAP_API_BASE = 'https://api.reservoir.tools'
 
 // OPTIONAL
 const SOULSWAP_API_KEY = process.env.SOULSWAP_API_KEY
@@ -62,7 +62,7 @@ const { chainId } = useActiveWeb3React()
 
   const title = META_TITLE && metadata.title(META_TITLE)
   const description = META_DESCRIPTION && metadata.description(META_DESCRIPTION)
-  // const image = metadata.image(META_IMAGE || 'https://soul.sh/title-logo.png')
+  const image = metadata.image(META_IMAGE || 'https://soul.sh/title-logo.png')
   const tagline = metadata.tagline(TAGLINE)
 
   // useEffect(() => {

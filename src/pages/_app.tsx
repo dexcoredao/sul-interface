@@ -7,6 +7,7 @@ import { remoteLoader } from '@lingui/remote-loader'
 import { Web3ReactProvider } from '@web3-react/core'
 import Dots from 'components/Dots'
 import Portals from 'components/Portals'
+
 import { SyncWithRedux } from 'components/SyncWithRedux'
 import Web3ReactManager from 'components/Web3ReactManager'
 // import { MultichainExploitAlertModal } from 'features/user/MultichainExploitAlertModal'
@@ -39,7 +40,12 @@ import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query
 import { QueryClient as ReactQueryClient, QueryClientProvider as ReactQueryClientProvider } from 'react-query'
 import { RelayEnvironmentProvider } from 'react-relay'
 import RelayEnvironment from 'services/graphql/data/RelayEnvironment'
+import AnalyticsProvider from 'components/NFT/AnalyticsProvider'
+import { GlobalProvider } from 'contexts/GlobalState'
+import { ReservoirSDK } from 'nfnt-client-sdk'
 
+const SOULSWAP_API_BASE = 'https://api.reservoir.tools'
+const PROXY_API_BASE = '/api/reservoir'
 
 const link = createHttpLink({
   // uri: RPC[250],
@@ -132,6 +138,11 @@ function MyApp({ Component, pageProps, fallback, err }) {
       </GelatoProvider>
     )
   }
+
+  ReservoirSDK.init({
+    apiBase: SOULSWAP_API_BASE ? SOULSWAP_API_BASE : '',
+  })
+  
   return (
     <>
       <Head>Soul</Head>
@@ -165,6 +176,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
           <ReactQueryClientProvider client={reactQueryClient}>
             <QueryClientProvider client={queryClient}>
               <Hydrate state={pageProps.dehydratedState}>
+                <GlobalProvider>
                 <ApiDataProvider>
                   <ApolloProvider client={client}>
                     {/*@ts-ignore TYPE NEEDS FIXING*/}
@@ -172,6 +184,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
                       <Web3ProviderNetwork getLibrary={getLibrary}>
                         <Web3ReactManager>
                           <RelayEnvironmentProvider environment={RelayEnvironment}>
+                          <AnalyticsProvider>
                             <ReduxProvider store={store}>
                               <PersistGate loading={<Dots>loading</Dots>} persistor={persistor}>
                                 <>
@@ -202,12 +215,14 @@ function MyApp({ Component, pageProps, fallback, err }) {
                                 </RecoilRoot>
                               </PersistGate>
                             </ReduxProvider>
+                            </AnalyticsProvider>
                           </RelayEnvironmentProvider>
                         </Web3ReactManager>
                       </Web3ProviderNetwork>
                     </FantomApiProvider>
                   </ApolloProvider>
                 </ApiDataProvider>
+                </GlobalProvider>
               </Hydrate>
             </QueryClientProvider>
           </ReactQueryClientProvider>

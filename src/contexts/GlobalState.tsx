@@ -16,8 +16,11 @@ export const GlobalContext = createContext<{
   dispatch: () => null,
 })
 
+interface GlobalProps {
+  children?: React.ReactNode
+}
 // @ts-ignore
-export const GlobalProvider: FC = ({ children }) => {
+export const GlobalProvider: FC<GlobalProps> = ({ children }) => {
   const [state, dispatch] = useReducer(Reducer, initialState)
 
   return (

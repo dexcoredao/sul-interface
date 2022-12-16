@@ -13,7 +13,7 @@ import useTokens from 'features/nft/hooks/useTokens'
 import useCollectionAttributes from 'features/nft/hooks/useCollectionAttributes'
 import { setToast } from 'components/NFT/token/setToast'
 import { paths, setParams } from 'nfnt-client-sdk'
-import Hero from 'components/NFT/Hero'
+// import Hero from 'components/NFT/hero/Hero'
 import { formatNumber } from 'features/nft/lib/numbers'
 import Sidebar from 'components/NFT/Sidebar'
 import AttributesFlex from 'components/NFT/attribute/AttributesFlex'
@@ -24,7 +24,7 @@ import { FiRefreshCcw } from 'react-icons/fi'
 import ExploreTokens from 'components/NFT/token/ExploreTokens'
 import TokensGrid from 'components/NFT/token/TokensGrid'
 import Head from 'next/head'
-import FormatEth from 'components/NFT/format/FormatEth'
+// import FormatEth from 'components/NFT/format/FormatEth'
 import useAttributes from 'features/nft/hooks/useAttributes'
 import * as Tabs from '@radix-ui/react-tabs'
 import { toggleOnItem } from 'features/nft/lib/router'
@@ -36,10 +36,9 @@ import { useActiveWeb3React } from 'services/web3'
 // For more information about these variables
 // refer to the README.md file on this repository
 // Reference: https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser
-// REQUIRED
 
 // OPTIONAL
-const SOULSWAP_API_KEY = process.env.SOULSWAP_API_KEY
+const SOULSWAP_API_KEY = process.env.SOULSWAP_API_KEY || '123e4567-e89b-12d3-a456-426614174000'
 
 const envBannerImage = process.env.NEXT_PUBLIC_BANNER_IMAGE
 
@@ -173,14 +172,14 @@ const Home: NextPage<Props> = ({ fallback, id }) => {
 
   return (
     // @ts-ignore
-    <Layout navbar={{}}>
+    // <Layout navbar={{}}>
       <>
         <Head>
           {title}
           {description}
           {image}
         </Head>
-        <Hero collectionId={id} fallback={fallback} />
+        {/* <Hero collectionId={id} fallback={fallback} /> */}
         <Tabs.Root
           value={router.query?.tab?.toString() || 'items'}
           className="col-span-full grid grid-cols-4 gap-x-4 md:grid-cols-8 lg:grid-cols-12 3xl:grid-cols-16 4xl:grid-cols-21"
@@ -212,9 +211,9 @@ const Home: NextPage<Props> = ({ fallback, id }) => {
 
                         <div className="h-9 w-px bg-gray-300 dark:bg-neutral-600"></div>
                         <div>
-                          <FormatEth
+                          {/* <FormatEth
                             amount={stats?.data?.stats?.market?.floorAsk?.price}
-                          />{' '}
+                          />{' '} */}
                           floor price
                         </div>
                       </>
@@ -295,7 +294,7 @@ const Home: NextPage<Props> = ({ fallback, id }) => {
           </Tabs.Content>
         </Tabs.Root>
       </>
-    </Layout>
+    // </Layout>
   )
 }
 

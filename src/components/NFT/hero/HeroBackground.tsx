@@ -1,8 +1,8 @@
 import { optimizeImage } from 'features/nft/lib/optimizeImage'
 import { FC } from 'react'
 
-const envBannerImage = process.env.NEXT_PUBLIC_BANNER_IMAGE
-const envBannerImageDisabled = process.env.NEXT_PUBLIC_DISABLE_COLLECTION_BG
+const envBannerImage = 'https://soul.sh/logo.png' // process.env.NEXT_PUBLIC_BANNER_IMAGE
+const envBannerImageDisabled = false // process.env.NEXT_PUBLIC_DISABLE_COLLECTION_BG
 
 type Props = {
   banner: string | undefined

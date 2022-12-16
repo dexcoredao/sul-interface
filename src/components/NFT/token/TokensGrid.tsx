@@ -11,7 +11,7 @@ import FormatWEth from 'components/NFT/format/FormatWEth'
 import Image from 'next/image'
 
 const SOURCE_ID = process.env.NEXT_PUBLIC_SOURCE_ID
-const NAVBAR_LOGO = process.env.NEXT_PUBLIC_NAVBAR_LOGO
+const NAVBAR_LOGO = 'https://soul.sh/logo.png' // process.env.NEXT_PUBLIC_NAVBAR_LOGO
 const SOURCE_ICON = process.env.NEXT_PUBLIC_SOURCE_ICON
 
 type Props = {
@@ -63,10 +63,11 @@ const TokensGrid: FC<Props> = ({ tokens, viewRef, collectionImage }) => {
                 href={`/${token?.contract}/${token?.tokenId}`}
               >
                 <a className="group relative mb-6 grid transform-gpu self-start overflow-hidden rounded-[16px] border border-[#D4D4D4] bg-white transition ease-in hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-lg hover:ease-out dark:border-0 dark:bg-neutral-800 dark:ring-1 dark:ring-neutral-600">
-                  {token?.source && (
+                   {token?.source && (
                     <Image
                     width={48}
                     height={48}
+                    unoptimized
                       className="absolute top-4 left-4 z-10 h-8 w-8"
                       src={
                         SOURCE_ID &&
@@ -81,7 +82,9 @@ const TokensGrid: FC<Props> = ({ tokens, viewRef, collectionImage }) => {
                   {token?.image ? (
                     <Image
                       loader={({ src }) => src}
-                      src={optimizeImage(token?.image, 250)}
+                      src={token?.image}
+                      unoptimized
+                      // src={optimizeImage(token?.image, 250)}
                       alt={`${token?.name}`}
                       className="w-full"
                       width={250}
@@ -93,7 +96,9 @@ const TokensGrid: FC<Props> = ({ tokens, viewRef, collectionImage }) => {
                       <div className="absolute inset-0 grid place-items-center backdrop-blur-lg">
                         <div>
                           <Image
-                            src={optimizeImage(collectionImage, 250)}
+                            // src={optimizeImage(collectionImage, 250)}
+                            src={collectionImage}
+                            unoptimized
                             alt={`${token?.collection?.name}`}
                             className="mx-auto mb-4 h-16 w-16 overflow-hidden rounded-full border-2 border-white"
                             width={64}
@@ -105,7 +110,9 @@ const TokensGrid: FC<Props> = ({ tokens, viewRef, collectionImage }) => {
                         </div>
                       </div>
                       <Image
-                        src={optimizeImage(collectionImage, 250)}
+                        // src={optimizeImage(collectionImage, 250)}
+                        src={collectionImage}
+                        unoptimized
                         alt={`${token?.collection?.name}`}
                         className="aspect-square w-full object-cover"
                         width={250}

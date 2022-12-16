@@ -63,7 +63,6 @@ const CollectionOfferModal: FC<Props> = ({
   const [expiration, setExpiration] = useState<string>('oneDay')
   const [waitingTx, setWaitingTx] = useState<boolean>(false)
   const [steps, setSteps] = useState<Execute['steps']>()
-  const { account, chainId, library } = useActiveWeb3React()
   const [open, setOpen] = useState(false)
   const { dispatch } = useContext(GlobalContext)
   const [calculations, setCalculations] = useState<
@@ -85,9 +84,10 @@ const CollectionOfferModal: FC<Props> = ({
   // const { data: ethBalance, refetch } = useBalance({
   //   addressOrName: account,
   // })
+  const { account, chainId, library } = useActiveWeb3React()
 
-  const ethBalance = BigNumber.from(0) //library.getBalance(account)
-  const signer = library.getSigner()
+  const ethBalance = BigNumber.from('0') //library.getBalance(account)
+  const signer = library?.getSigner()
   const provider = library.provider
 
   function getBps(royalties: number | undefined, envBps: string | undefined) {

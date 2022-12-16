@@ -10,7 +10,7 @@ import useCollection from 'features/nft/hooks/useCollection'
 import { useRouter } from 'next/router'
 import useTokens from 'features/nft/hooks/useTokens'
 import HeroSocialLinks from 'components/NFT/hero/HeroSocialLinks'
-import HeroBackground from 'components/NFT/hero/HeroBackground'
+// import HeroBackground from 'components/NFT/hero/HeroBackground'
 import HeroStats from 'components/NFT/hero/HeroStats'
 import Sweep from '../Sweep'
 import ReactMarkdown from 'react-markdown'
@@ -35,6 +35,7 @@ type Props = {
 }
 
 type CollectionModalProps = ComponentProps<typeof CollectionOfferModal>
+// type CollectionModalProps = ComponentProps<any>
 type AttibuteModalProps = ComponentProps<typeof AttributeOfferModal>
 
 const Hero: FC<Props> = ({ fallback, collectionId }) => {
@@ -55,31 +56,31 @@ const Hero: FC<Props> = ({ fallback, collectionId }) => {
   const [descriptionExpanded, setDescriptionExpanded] = useState(false)
   const descriptionRef = useRef<HTMLParagraphElement | null>(null)
 
-  useEffect(() => {
-    const keys = Object.keys(router.query)
-    const attributesSelected = keys.filter(
-      (key) =>
-        key.startsWith('attributes[') &&
-        key.endsWith(']') &&
-        router.query[key] !== ''
-    )
+  // useEffect(() => {
+    // const keys = Object.keys(router.query)
+    // const attributesSelected = keys.filter(
+    //   (key) =>
+    //     key.startsWith('attributes[') &&
+    //     key.endsWith(']') &&
+    //     router.query[key] !== ''
+    // )
 
     // Only enable the attribute modal if one attribute is selected
-    if (attributesSelected.length !== 1) {
-      setAttribute({
-        // Extract the key from the query key: attributes[{key}]
-        key: undefined,
-        value: undefined,
-      })
-      return
-    }
+    // if (attributesSelected.length !== 1) {
+    //   setAttribute({
+    //     // Extract the key from the query key: attributes[{key}]
+    //     key: undefined,
+    //     value: undefined,
+    //   })
+    //   return
+    // }
 
-    setAttribute({
+    // setAttribute({
       // Extract the key from the query key: attributes[{key}]
-      key: attributesSelected[0].slice(11, -1),
-      value: router.query[attributesSelected[0]]?.toString(),
-    })
-  }, [router.query])
+      // key: attributesSelected[0].slice(11, -1),
+      // value: router.query[attributesSelected[0]]?.toString(),
+    // })
+  // }, [router.query])
 
   if (!CHAIN_ID) {
     throw 'Chain ID Required'
@@ -173,7 +174,7 @@ const Hero: FC<Props> = ({ fallback, collectionId }) => {
   return (
     <>
     {/* @ts-ignore */}
-      <HeroBackground banner={header.banner}>
+      {/* <HeroBackground banner={header.banner}> */}
         <div className="z-10 flex w-full flex-col items-center gap-6">
           <Image
           height={20}
@@ -187,7 +188,7 @@ const Hero: FC<Props> = ({ fallback, collectionId }) => {
           </h1>
           <HeroSocialLinks collection={collection?.data?.collection} />
           <HeroStats stats={statsObj} />
-          {header.description && (
+          {/* {header.description && (
             <>
               <div
                 className="relative overflow-hidden transition-[max-height] ease-in-out md:w-[423px]"
@@ -219,7 +220,7 @@ const Hero: FC<Props> = ({ fallback, collectionId }) => {
                 </a>
               )}
             </>
-          )}
+          )} */}
           <div className="flex w-full flex-col justify-center gap-4 md:flex-row">
             {isSupported &&
               (isAttributeModal ? (
@@ -233,16 +234,27 @@ const Hero: FC<Props> = ({ fallback, collectionId }) => {
                   setToast={setToast}
                 />
               ) : (
-                <CollectionOfferModal
-                  royalties={royalties}
-                  signer={signer}
-                  data={collectionData}
-                  env={env}
-                  stats={stats}
-                  tokens={tokens}
-                  setToast={setToast}
-                />
-              ))}
+              //   <AttributeOfferModal
+              //   royalties={royalties}
+              //   signer={signer}
+              //   data={attributeData}
+              //   env={env}
+              //   stats={stats}
+              //   tokens={tokens}
+              //   setToast={setToast}
+              // />
+              null
+                // <CollectionOfferModal
+                //   royalties={royalties}
+                //   signer={signer}
+                //   data={collectionData}
+                //   env={env}
+                //   stats={stats}
+                //   tokens={tokens}
+                //   setToast={setToast}
+                // />
+              )
+              )}
             <Sweep
               collection={collection}
               tokens={tokens}
@@ -250,7 +262,7 @@ const Hero: FC<Props> = ({ fallback, collectionId }) => {
             />
           </div>
         </div>
-      </HeroBackground>
+      {/* </HeroBackground> */}
     </>
   )
 }

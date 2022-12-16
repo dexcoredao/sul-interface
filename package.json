@@ -157,6 +157,7 @@
     "@chakra-ui/react": "^2.2.1",
     "@clover-network/clover-connector": "^1.0.0",
     "@coinbase/wallet-sdk": "^3.5.4",
+    "@datadog/browser-rum": "^4.28.1",
     "@davatar/react": "^1.11.1",
     "@emotion/react": "^11.9.0",
     "@gnosis.pm/gp-v2-contracts": "1.1.2",
