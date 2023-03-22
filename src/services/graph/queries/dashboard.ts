@@ -25,63 +25,52 @@ export const getUnderworldPairsQuery = gql`
       }
       exchangeRate
       utilization
-      totalAssets
+      interestPerSecond
+      totalAssetElastic
+      totalAssetBase
       supplyAPR
-      totalBorrow {
-        id
-        base
-        elastic
-      }
+      totalBorrowElastic
+      totalBorrowBase
       borrowAPR
     }
   }
 `
 
-export const getUnderworldPairsDayDataDashboardQuery = gql`
+export const getUnderworldPairsDayDataQuery = gql`
   query GetDataUnderworldPairsDayData($skip: Int) {
-    underworldPairDaySnapshots(
+    underworldPairDayDatas(
       first: 1000
       skip: $skip
       orderBy: date
       orderDirection: desc
     ) {
+      id
+      date
+      pair {
         id
-        date
-        pair {
+        name
+        symbol
+        asset {
           id
           name
           symbol
-          asset {
-            id
-            name
-            symbol
-            decimals
-          }
-          collateral {
-            id
-            name
-            symbol
-            decimals
-          }
-          totalAsset {
-              id
-              base
-              elastic
-            }
-          totalBorrow {
-              id
-              base
-              elastic
-            }
-          accrueInfo {
-              lastAccrued
-              interestPerSecond
-              feesEarnedFraction
-          }
+          decimals
         }
-        totalCollateralShare
-        exchangeRate
-        utilization
+        collateral {
+          id
+          name
+          symbol
+          decimals
+        }
+      }
+      totalAssetElastic
+      totalAssetBase
+      totalCollateralShare
+      totalBorrowElastic
+      totalBorrowBase
+      avgExchangeRate
+      avgUtilization
+      avgInterestPerSecond
     }
   }
 `

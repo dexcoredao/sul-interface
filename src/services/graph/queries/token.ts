@@ -7,6 +7,8 @@ export const getTokensQuery = gql`
       name
       symbol
       decimals
+      totalSupplyElastic
+      totalSupplyBase
       block
       timestamp
     }
@@ -19,7 +21,8 @@ export const getTokensQuery = gql`
         name
         symbol
         decimals
-        totalSupply
+        totalSupplyElastic
+        totalSupplyBase
         block
         timestamp
       }
@@ -28,30 +31,25 @@ export const getTokensQuery = gql`
         name
         symbol
         decimals
-        totalSupply
+        totalSupplyElastic
+        totalSupplyBase
         block
         timestamp
       }
-      totalAsset {
-        id
-        base
-        elastic
-      }
-      totalBorrow {
-        id
-        base
-        elastic
-      }
+      totalAssetElastic
+      totalAssetBase
       totalCollateralShare
+      totalBorrowElastic
+      totalBorrowBase
       supplyAPR
       borrowAPR
     }
   }
 `
-// formerly pairs
+
 export const getUnderworldPairsDayDataQuery = gql`
   query GetDataUnderworldPairsDayData($pairIds: [String], $skip: Int) {
-    underworldPairDaySnapshots(
+    underworldPairDayDatas(
       first: 1000
       where: { pair_in: $pairIds }
       orderBy: date
@@ -75,25 +73,15 @@ export const getUnderworldPairsDayDataQuery = gql`
           symbol
           decimals
         }
-        totalAsset {
-            id
-            base
-            elastic
-          }
-        totalBorrow {
-            id
-            base
-            elastic
-          }
-        accrueInfo {
-            lastAccrued
-            interestPerSecond
-            feesEarnedFraction
-        }
       }
+      totalAssetElastic
+      totalAssetBase
       totalCollateralShare
-      exchangeRate
-      utilization
+      totalBorrowElastic
+      totalBorrowBase
+      avgExchangeRate
+      avgUtilization
+      avgInterestPerSecond
     }
   }
 `

@@ -8,13 +8,11 @@ import TokenUtilService from "services/utils/TokenUtilService"
 import Reducer, { initialState } from "stores/reducer"
 import { ActionValues, State } from "stores/types"
 
-// export const API_URL: string = process.env.API_URL || "http://localhost:8000";
-export const API_URL = 'http://localhost:8000'
-// 'https://api.thegraph.com/subgraphs/name/soulswapfinance/fantom-underworld'
+export const API_URL: string = process.env.API_URL || "http://localhost:8000";
 
 export const handleLogoError = (event: React.SyntheticEvent) => {
   const imgElement = event.target as HTMLImageElement
-  imgElement.src = "/soul.png"
+  imgElement.src = "/icon-quiz.jpg"
 }
 interface AppContextProps {
   store: [State, React.Dispatch<ActionValues>]
