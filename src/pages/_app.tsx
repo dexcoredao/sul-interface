@@ -165,7 +165,9 @@ function MyApp({ Component, pageProps, fallback, err }) {
       <Hydrate state={pageProps.dehydratedState}>
         <ApiDataProvider>
           <ApolloProvider client={client}>
- 
+          <ApolloContextProvider>
+          <AppContextProvider>
+          {/*@ts-ignore TYPE NEEDS FIXING*/}
           <FantomApiProvider>
           <Web3ProviderNetwork getLibrary={getLibrary}>
             <Web3ReactManager>
@@ -202,7 +204,8 @@ function MyApp({ Component, pageProps, fallback, err }) {
             </Web3ReactManager>
           </Web3ProviderNetwork>
           </FantomApiProvider>
- 
+          </AppContextProvider>
+          </ApolloContextProvider>
           </ApolloProvider>
           </ApiDataProvider>
           </Hydrate>
