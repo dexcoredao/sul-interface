@@ -575,7 +575,7 @@ export const ActiveRow = ({ pid }) => {
                                 )}
 
                                 {/* APPROVED */}
-                                {hasBalance && (
+                                {approved && hasBalance && (
                                     <SubmitButton
                                         height="2rem"
                                         primaryColor={buttonColor}
